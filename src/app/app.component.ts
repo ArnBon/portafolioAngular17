@@ -22,7 +22,7 @@ import { InfoPaginaServiceService } from './services/info-pagina-service.service
         PortafolioComponent,
         AboutComponent,
         ItemComponent,
-        HttpClientModule
+        HttpClientModule,
 
     ]
 })

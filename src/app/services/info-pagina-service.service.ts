@@ -9,8 +9,15 @@ export class InfoPaginaServiceService {
 
   info: InfoPagina = {};
   cargada = false;
+  equipo: any[] = [];
 
    constructor(private http: HttpClient) {
+    this.cargarInfo();
+    this.cargarEquipo();
+
+   }
+
+   private cargarInfo(){
     // console.log('Servicio de infopagina listo');
 
     //Leer archivo JSON eso se hace a traves del endpoint que necesitas
@@ -21,5 +28,14 @@ export class InfoPaginaServiceService {
       console.log(resp);
 
     });
+   }
+
+   private cargarEquipo(){
+    this.http.get('https://angular-html-de05f-default-rtdb.firebaseio.com/equipo.json')//y este es el endpoint
+    .subscribe( (resp: any) => {
+      this.equipo = resp;
+      console.log(resp);
+    });
+
    }
 }
