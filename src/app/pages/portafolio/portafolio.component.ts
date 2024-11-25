@@ -10,6 +10,6 @@ import { RouterLink, RouterModule } from '@angular/router';
   styleUrl: './portafolio.component.scss'
 })
 export class PortafolioComponent {
-  
+
 
 }
