@@ -16,11 +16,15 @@ export class ProductosService {
 
    private cargarProductos(){
 
-    return this.http.get<ProductoInterface[]>('https://angular-html-de05f-default-rtdb.firebaseio.com/productos_idx.json')//y este es el endpoint
+     this.http.get<ProductoInterface[]>('https://angular-html-de05f-default-rtdb.firebaseio.com/productos_idx.json')//y este es el endpoint
     .subscribe( (resp ) => {
       console.log('Respuesta: ', resp);
       this.productos = resp;
       this.cargando = false;
+      // setTimeout( () => {
+      //   this.cargando = false;
+      // }, 2000);
+
     });
 
    }
