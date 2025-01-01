@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ProductosService } from '../../services/productos.service';
+import { ProductoDescripcion } from '../../interfaces/producto-descripcion.interface';
 
 @Component({
   selector: 'app-item',
@@ -10,17 +12,43 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ItemComponent implements OnInit{
 
-  constructor(private route: ActivatedRoute){}
+  constructor(private route: ActivatedRoute,
+              public _productoService: ProductosService
+  ){}
+
+
+  // ngOnInit(): void {
+  //   /*se van a a pasar los parametros de la url es decir para saber que id es; es decir el parametro es el id */
+  //   this.route.params
+  //   .subscribe(parametros => {
+  //     // console.log(parametros)
+  //     this._productoService.getProducto(parametros['id'])
+  //     .subscribe( ( producto: ProductoDescripcion) =>  {
+  //       console.log(producto);
+  //     });
+  //   });
+  // }
 
 
   ngOnInit(): void {
-    /*se vana a pasar los parametros
-    de la url es decir para saber que id es
-    es decir el parametro es el id */
-    this.route.params
-    .subscribe(parametros =>{
-      console.log(parametros)
-    })
-  }
+    //   /*se van a a pasar los parametros de la url es decir para saber que id es; es decir el parametro es el id */
+  this.route.params.subscribe(parametros => {
+    const id = parametros['id'];
+
+    // Verificar si id es válido
+    if (id) {
+      this._productoService.getProducto(id)
+      .subscribe((producto: ProductoDescripcion) => {
+          console.log(producto);
+        },
+        error => {
+          console.error('Error al obtener el producto:', error);
+        }
+      );
+    } else {
+      console.error('ID no válido');
+    }
+  });
+}
 
 }
